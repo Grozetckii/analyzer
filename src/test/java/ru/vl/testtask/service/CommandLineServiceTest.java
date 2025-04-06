@@ -41,10 +41,8 @@ class CommandLineServiceTest {
 
         try (MockedConstruction<LogAnalyzerService> mocked = mockConstruction(
                 LogAnalyzerService.class,
-                (mock, context) -> {
-                    doNothing().when(mock)
-                            .analyze(any(BufferedReader.class), anyLong(), anyDouble());
-                })) {
+                (mock, context) -> doNothing().when(mock)
+                        .analyze(any(BufferedReader.class), anyLong(), anyDouble()))) {
 
             //WHEN
             CommandLineService service = new CommandLineService();
@@ -67,11 +65,8 @@ class CommandLineServiceTest {
 
         try (MockedConstruction<LogAnalyzerService> mocked = mockConstruction(
                 LogAnalyzerService.class,
-                (mock, context) -> {
-                    doThrow(new RuntimeException("Test error"))
-                            .when(mock)
-                            .analyze(any(BufferedReader.class), anyLong(), anyDouble());
-                })) {
+                (mock, context) -> doThrow(new RuntimeException("Test error"))
+                        .when(mock).analyze(any(BufferedReader.class), anyLong(), anyDouble()))) {
 
             //WHEN
             CommandLineService service = new CommandLineService();
